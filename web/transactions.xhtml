@@ -5,28 +5,39 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
+        <h:outputStylesheet name="css/style.css"/>
     </h:head>
     <h:body>
-        <h:outputText value="#{indexManagedBean.email}"></h:outputText>
+        <div class="row">
+            <a href="products.xhtml" style="float: left; padding: 2px; width: 100px;"><button>Products</button></a>
+            <div class="label" style="float: left; padding: 2px; width: 100px;">Orders</div>
+            <a href="cart.xhtml" style="float: left; padding: 2px; width: 100px;"><button>Cart</button></a>
+            <a href="userinfo.xhtml" style="float: left; padding: 2px; width: 100px;"><button>User</button></a>
+        </div>
 
-        <h:dataTable value="#{transactionsManagedBean.transactions}" var="transaction">
-            <h:column>            
-                <f:facet name="header">ID</f:facet>            
-                    #{transaction.id}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Date</f:facet>
-                    #{transaction.date}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Detail</f:facet>
-                <h:commandButton value="Watch" action="transactioninfo">
-                    <f:param name="id" value="#{transaction.id}"/>
-                </h:commandButton>
-            </h:column>
-        </h:dataTable>
+        <h:outputText styleClass="title" value="#{indexManagedBean.email}"></h:outputText>
 
-        <h:link value="Go to Products" outcome="products"></h:link>
+        <h:form>
+            <h:dataTable value="#{transactionsManagedBean.transactions}" var="transaction"
+                         styleClass="table"
+                         headerClass="table-header"
+                         rowClasses="table-odd-row,table-even-row">
+                <h:column>
+                    <f:facet name="header">ID</f:facet>            
+                        #{transaction.id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Date</f:facet>
+                        #{transaction.date}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Detail</f:facet>
+                    <h:commandButton value="Watch" action="transactioninfo">
+                        <f:param name="id" value="#{transaction.id}"/>
+                    </h:commandButton>
+                </h:column>
+            </h:dataTable>
+        </h:form>
 
     </h:body>
 </html>

@@ -4,9 +4,16 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
         <title>Facelet Title</title>
+        <h:outputStylesheet name="css/style.css"/>
     </h:head>
     <h:body>
-        userinfo
+        <div class="row">
+            <a href="products.xhtml" style="float: left; padding: 2px; width: 100px;"><button>Products</button></a>
+            <a href="transactions.xhtml" style="float: left; padding: 2px; width: 100px;"><button>Orders</button></a>
+            <a href="cart.xhtml" style="float: left; padding: 2px; width: 100px;"><button>Cart</button></a>
+            <div class="label" style="float: left; padding: 2px; width: 100px;">User</div>
+        </div>
     </h:body>
+    
 </html>
 

@@ -5,7 +5,9 @@
  */
 package fit5192.zz.managed;
 
+import fit5192.zz.repository.ProductRepository;
 import fit5192.zz.repository.TransactionRepository;
+import fit5192.zz.repository.UserRepository;
 import fit5192.zz.repository.entities.Product;
 import fit5192.zz.repository.entities.Transaction_;
 import fit5192.zz.repository.entities.User_;
@@ -34,6 +36,10 @@ public class CartManagedBean implements Serializable {
 
     @EJB
     private TransactionRepository transactionRepository;
+    @EJB
+    private ProductRepository productRepository;
+    @EJB
+    private UserRepository userRepository;
 
     private Map<Product, Integer> cart;  // store product with corresponding quantity
     private List<Product> cartList;  // store product only
@@ -49,9 +55,34 @@ public class CartManagedBean implements Serializable {
     }
 
     public String order() {
+//        Date now =new Date();
+//        Product pro=new Product("strawberry",2,"berry",10,21);
+//        List<Product> proList=new ArrayList<Product>();
+//        proList.add(pro);
+//        User_ user1=new User_("aaa@qq.com","12345678f.123");
+//        //Rating rating=new Rating(5,pro,user);
+//        Transaction_ tran = new Transaction_(now,proList,user1);
+//        try {
+////            userRepository.addUser(user1);
+////            productRepository.addProduct(pro);
+//            transactionRepository.addTransaction(tran);
+//            //ratingRepository.addRating(rating);
+//           // productRepository.searchTest();
+//            
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//        return "";
         Date date = new Date();
-        System.out.println(date.toString());
-        
+//        List<Product> ps = new ArrayList<>();
+//        for (Product product : cartList) {
+//            try{
+//                Product p = productRepository.searchProductById(product.getId());
+//                ps.add(p);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
         Transaction_ transaction = new Transaction_(date, cartList, user);
 
         try {
@@ -99,6 +130,10 @@ public class CartManagedBean implements Serializable {
 
     public void setCartList(List<Product> cartList) {
         this.cartList = cartList;
+    }
+
+    public User_ getUser() {
+        return user;
     }
 
     

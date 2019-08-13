@@ -5,11 +5,12 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
+        <h:outputStylesheet name="css/style.css"/>
     </h:head>
     <h:body>
+        <h:outputText styleClass="title" value="#{indexManagedBean.registerMessage}"></h:outputText>
+        
         <h:form>
-            <h:outputText value="#{indexManagedBean.registerMessage}"></h:outputText>
-
             <div class="label">Email</div>
             <h:inputText class="input" value="#{indexManagedBean.email}">
                 <f:validateRegex pattern="^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$" />
@@ -25,7 +26,7 @@
                 <f:validateRegex pattern="^(?=.*[a-zA-Z])(?=.*[1-9])(?=.*[\W]).{8,20}$" />
             </h:inputSecret>
 
-            <h:commandButton value="Go Login" action="register"></h:commandButton>
+            <h:commandButton value="Register" action="#{indexManagedBean.register}"></h:commandButton>
         </h:form>
         
         <h:link value="Go Login" outcome="index"></h:link>

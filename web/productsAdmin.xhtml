@@ -6,51 +6,27 @@
     <h:head>
         <title>Facelet Title</title>
         <h:outputStylesheet name="css/style.css"/>
-        <style type="text/css"> 
-            h1{color:red} 
-            p{color:blue}
-        </style> 
     </h:head>
     <h:body>
-        <div class="row">
-            <div class="label" style="float: left; padding: 2px; width:100px;">Products</div>
-            <a href="transactions.xhtml" style="float: left; padding: 2px; width: 100px;"><button>Orders</button></a>
-            <a href="cart.xhtml" style="float: left; padding: 2px; width: 100px;"><button>Cart</button></a>
-            <a href="userinfo.xhtml" style="float: left; padding: 2px; width: 100px;"><button>User</button></a>
-        </div>
-
         <h:outputText styleClass="title" value="#{indexManagedBean.email}"></h:outputText>
 
         <h:form>
-            <div class="row">
-                <div class="label">Name</div>
-                <h:inputText value="#{productsManagedBean.inputProductName}"></h:inputText>
-            </div>
-            <div class="row">
-                <div class="label">Category</div>
-                <h:inputText value="#{productsManagedBean.inputProductCategory}"></h:inputText>
-            </div>
-            <div class="row">
-                <div class="label">Area</div>
-                <h:inputText value="#{productsManagedBean.inputProductArea}"></h:inputText>
-            </div>
-            <div class="row">
-                <div class="label">Price</div>
-                <h:inputText value="#{productsManagedBean.inputProductPrice}"></h:inputText>
-            </div>
-            <div class="row">
-                <div class="label">Inventory</div>
-                <h:inputText value="#{productsManagedBean.inputProductInventory}"></h:inputText>
-            </div>
-            <div class="row">
-                <h:commandButton value="Search" action="#{productsManagedBean.searchProduct}"></h:commandButton>
-                <h:commandButton value="Restore" action="#{productsManagedBean.viewAllProducts}"></h:commandButton>
-            </div>
+            <div class="label">ID</div>
+            <h:inputText value="#{productsManagedBean.inputProductId}"></h:inputText>
+            <div class="label">Name</div>
+            <h:inputText value="#{productsManagedBean.inputProductName}"></h:inputText>
+            <div class="label">Category</div>
+            <h:inputText value="#{productsManagedBean.inputProductCategory}"></h:inputText>
+            <div class="label">Area</div>
+            <h:inputText value="#{productsManagedBean.inputProductArea}"></h:inputText>
+            <div class="label">Price</div>
+            <h:inputText value="#{productsManagedBean.inputProductPrice}"></h:inputText>
+            <div class="label">Inventory</div>
+            <h:inputText value="#{productsManagedBean.inputProductInventory}"></h:inputText>
 
-            <h:dataTable value="#{productsManagedBean.products}" var="product"
-                         styleClass="table"
-                         headerClass="table-header"
-                         rowClasses="table-odd-row,table-even-row">
+            <h:commandButton value="Add" action="#{productsManagedBean.addProduct}"></h:commandButton>
+
+            <h:dataTable value="#{productsManagedBean.products}" var="product">
                 <h:column>            
                     <f:facet name="header">ID</f:facet>            
                         #{product.id}
@@ -94,6 +70,10 @@
 
         </h:form>
 
+        <div class="label">Products</div>
+        <a href="transactions"><button>Transactions</button></a>
+        <a href="cart"><button>Cart</button></a>
+        <a href="userinfo"><button>User</button></a>
     </h:body>
 </html>
 

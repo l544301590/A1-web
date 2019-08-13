@@ -67,7 +67,7 @@ public class IndexManagedBean implements Serializable {
         try {
             int level = Integer.parseInt(res);
             user = userRepository.searchUserByEmail(email).get(0);  // store globally
-            return "userinfo";
+            return "products";
         } catch (Exception e) {
             this.registerMessage = res;
         }

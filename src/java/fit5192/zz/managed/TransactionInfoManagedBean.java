@@ -15,8 +15,8 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.el.ELContext;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @ManagedBean
 @Named(value = "transactionInfoManagedBean")
-@SessionScoped
+@RequestScoped
 public class TransactionInfoManagedBean {
 
     @EJB
@@ -53,6 +53,7 @@ public class TransactionInfoManagedBean {
     public void initProductList() {
         try {
             Transaction_ transaction = transactionRepository.searchTransactionById(id);
+            this.date = transaction.getDate();
             this.products = transaction.getProducts();
         } catch (Exception e) {
             e.printStackTrace();

@@ -80,13 +80,22 @@ public class ProductsManagedBean {
         }
 
     }
-
+    
     public void updateProduct() {
 
     }
 
     public void searchProduct() {
-
+        Product product = new Product(inputProductName, inputProductCategory, inputProductArea, inputProductPrice, inputProductInventory);
+        this.products = productRepository.searchProductByAnyAttribute(product);
+    }
+    
+    public void viewAllProducts() {
+        try {
+            this.products = productRepository.getAllProducts();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void addToCart(Product product) {
