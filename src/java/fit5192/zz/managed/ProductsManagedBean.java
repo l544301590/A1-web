@@ -26,7 +26,7 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @Named(value = "productsManagedBean")
-@ApplicationScoped
+@SessionScoped
 public class ProductsManagedBean {
 
     @EJB
@@ -35,12 +35,12 @@ public class ProductsManagedBean {
     private List<Product> products;
     private User_ user;
 
-    private int inputProductId;
+    private String inputProductId;
     private String inputProductName;
-    private int inputProductCategory;
+    private String inputProductCategory;
     private String inputProductArea;
-    private float inputProductPrice;
-    private int inputProductInventory;
+    private String inputProductPrice;
+    private String inputProductInventory;
     private String inputProductDescription;
 
     public ProductsManagedBean() {
@@ -61,7 +61,13 @@ public class ProductsManagedBean {
 
     public void addProduct() {
         try {
-            Product product = new Product(inputProductName, inputProductCategory, inputProductArea, inputProductPrice, inputProductInventory);
+            Product product = new Product(
+                    inputProductName, 
+                    Integer.parseInt(inputProductCategory), 
+                    inputProductArea, 
+                    Float.parseFloat(inputProductPrice), 
+                    Integer.parseInt(inputProductInventory)
+            );
             productRepository.addProduct(product);
             products.add(product);
             products = productRepository.getAllProducts();
@@ -86,7 +92,22 @@ public class ProductsManagedBean {
     }
 
     public void searchProduct() {
-        Product product = new Product(inputProductName, inputProductCategory, inputProductArea, inputProductPrice, inputProductInventory);
+        Product product = new Product();
+        if (this.inputProductName.length() > 0) {
+            product.setName(inputProductName);
+        }
+        if (this.inputProductCategory.length() > 0) {
+            product.setCategory(Integer.parseInt(inputProductCategory));
+        }
+        if (this.inputProductArea.length() > 0) {
+            product.setArea(inputProductArea);
+        }
+        if (this.inputProductPrice.length() > 0) {
+            product.setPrice(Float.parseFloat(inputProductPrice));
+        }
+        if (this.inputProductInventory.length() > 0) {
+            product.setPrice(Integer.parseInt(inputProductInventory));
+        }
         this.products = productRepository.searchProductByAnyAttribute(product);
     }
     
@@ -116,28 +137,12 @@ public class ProductsManagedBean {
         this.products = products;
     }
 
-    public int getInputProductId() {
-        return inputProductId;
-    }
-
-    public void setInputProductId(int inputProductId) {
-        this.inputProductId = inputProductId;
-    }
-
     public String getInputProductName() {
         return inputProductName;
     }
 
     public void setInputProductName(String inputProductName) {
         this.inputProductName = inputProductName;
-    }
-
-    public int getInputProductCategory() {
-        return inputProductCategory;
-    }
-
-    public void setInputProductCategory(int inputProductCategory) {
-        this.inputProductCategory = inputProductCategory;
     }
 
     public String getInputProductArea() {
@@ -148,22 +153,6 @@ public class ProductsManagedBean {
         this.inputProductArea = inputProductArea;
     }
 
-    public float getInputProductPrice() {
-        return inputProductPrice;
-    }
-
-    public void setInputProductPrice(float inputProductPrice) {
-        this.inputProductPrice = inputProductPrice;
-    }
-
-    public int getInputProductInventory() {
-        return inputProductInventory;
-    }
-
-    public void setInputProductInventory(int inputProductInventory) {
-        this.inputProductInventory = inputProductInventory;
-    }
-
     public String getInputProductDescription() {
         return inputProductDescription;
     }
@@ -171,4 +160,37 @@ public class ProductsManagedBean {
     public void setInputProductDescription(String inputProductDescription) {
         this.inputProductDescription = inputProductDescription;
     }
+
+    public String getInputProductId() {
+        return inputProductId;
+    }
+
+    public void setInputProductId(String inputProductId) {
+        this.inputProductId = inputProductId;
+    }
+
+    public String getInputProductCategory() {
+        return inputProductCategory;
+    }
+
+    public void setInputProductCategory(String inputProductCategory) {
+        this.inputProductCategory = inputProductCategory;
+    }
+
+    public String getInputProductPrice() {
+        return inputProductPrice;
+    }
+
+    public void setInputProductPrice(String inputProductPrice) {
+        this.inputProductPrice = inputProductPrice;
+    }
+
+    public String getInputProductInventory() {
+        return inputProductInventory;
+    }
+
+    public void setInputProductInventory(String inputProductInventory) {
+        this.inputProductInventory = inputProductInventory;
+    }
+    
 }

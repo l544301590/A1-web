@@ -41,6 +41,10 @@ public class IndexManagedBean implements Serializable {
     private String loginMessage = "Welcome! Please Login!";
     private String registerMessage = "Welcome! Please Register!";
     private User_ user;
+    
+    private boolean moreThanVisitor = false;
+    private boolean moreThanManager = false;
+    private boolean isAdmin = false;
 
     public IndexManagedBean() {
     }
@@ -51,6 +55,16 @@ public class IndexManagedBean implements Serializable {
         try {
             int level = Integer.parseInt(res);
             user = userRepository.searchUserByEmail(email).get(0);  // store globally
+            // store level for certain buttons' visibility
+            if (user.getLevel() <= 3) {
+                this.moreThanVisitor = true;
+            }
+            if (user.getLevel() <= 2) {
+                this.moreThanManager = true;
+            }
+            if (user.getLevel() == 1) {
+                this.isAdmin = true;
+            }
             return "products";  // login successfully, jump to products.xhtml
         } catch (NumberFormatException e) {
             this.loginMessage = res;  // modify prompt message
@@ -116,6 +130,30 @@ public class IndexManagedBean implements Serializable {
 
     public User_ getUser() {
         return user;
+    }
+
+    public boolean isMoreThanVisitor() {
+        return moreThanVisitor;
+    }
+
+    public void setMoreThanVisitor(boolean moreThanVisitor) {
+        this.moreThanVisitor = moreThanVisitor;
+    }
+
+    public boolean isMoreThanManager() {
+        return moreThanManager;
+    }
+
+    public void setMoreThanManager(boolean moreThanManager) {
+        this.moreThanManager = moreThanManager;
+    }
+
+    public boolean isIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
 }
