@@ -10,36 +10,123 @@ and open the template in the editor.
 
 /* Main Sections */  
 body { 
-    background: #b8edff; 
-    font-family: sansserif; 
-/*    margin: auto;
-    height: 100%;*/
+    font-family: sansserif;
+    width: 100%;
 }
+
 .row {
     padding-top: 10px;
     padding-bottom: 10px;
+    height: 30px;
+    margin: auto;
 }
-.label {
-    font-size: 14px;
-    padding: 3px;
+.row .label {
+    width: 10%;
+    height: 30px;
+    float: left;
+    margin-right: 30px;
 }
-button {
-    font-size: 14px;
-    border-radius: 3px;
+.row .label span {
+    padding: 0;
+    float: right;
+    height: 30px;
+    line-height: 30px;
+    vertical-align: middle;
 }
+.row .input {
+    width: 30%;
+    height: 100%;
+    float: left;
+}
+.row .buttons {
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+.tab {
+    padding: .3em .8em;
+    border: 1px solid rgba(0,0,0,.1);
+    background: #58a linear-gradient(hsla(0,0%,100%,.2),transparent);
+    border-radius: .2em;
+    box-shadow: 0 .05em .25em rgba(0,0,0,.5);
+    color: white;
+    text-shadow: 0 -.05em .05em rgba(0,0,0,.5);
+    font-size: 100%;
+    line-height: 1.5;
+}
+
 .title {
-    padding: 20px; background-color: #57d5ff; border-radius: 3px; font-size: 20px; margin-top: 100px;
-}
-.table-header{
-  bbook-bottom:1px solid #FFF;
-  padding:16px;
-}
-
-.table-odd-row{
-  bbook-top:1px solid #FFF;
+    padding: 20px; 
+    background-color: #57d5ff; 
+    border-radius: 3px; 
+    font-size: 20px; 
+    margin-bottom: 100px;
 }
 
-.table-even-row{
-  bbook-top:1px solid #FFF;
+.container {
+    width: 100%;
 }
+
+/* h:inputText */  
+.input{
+    width: 280px;
+    height: 30px; 
+    border-radius: 5px;
+    -webkit-transition: all 0.30s ease-in-out; 
+    -moz-transition: all 0.30s ease-in-out; 
+    -ms-transition: all 0.30s ease-in-out; 
+    -o-transition: all 0.30s ease-in-out; 
+    outline: none; 
+    padding: 3px 0 3px 3px; 
+    border: #ddd 1px solid; 
+    font-size: 14px;
+}
+.input:focus { 
+    box-shadow: 0 0 5px rgba(216,76,41,1); 
+    padding: 3px 0 3px 3px; 
+    margin: 5px 1px 3px 0; 
+    border: rgba(216,76,41,1) 1px solid; 
+} 
+
+/* button */
+.button, button {
+    padding: .3em .8em;
+    border: 1px solid rgba(0,0,0,.1);
+    background: #58a linear-gradient(hsla(0,0%,100%,.2),transparent);
+    border-radius: .2em;
+    box-shadow: 0 .05em .25em rgba(0,0,0,.5);
+    color: white;
+    text-shadow: 0 -.05em .05em rgba(0,0,0,.5);
+    font-size: 100%;
+    line-height: 1.5;
+}
+
+/* h:dataTable */ 
+table
+{
+    border-collapse: collapse;
+    margin: 0 auto;
+    text-align: center;
+}
+table td, table th
+{
+    border: 1px solid #cad9ea;
+    color: #666;
+    height: 30px;
+}
+table thead th
+{
+    background-color: #CCE8EB;
+    width: 100px;
+}
+table tr:nth-child(odd)
+{
+    background: #fff;
+}
+table tr:nth-child(even)
+{
+    background: #F5FAFA;
+}
+
 

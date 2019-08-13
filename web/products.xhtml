@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Facelet Title</title>
         <h:outputStylesheet name="css/style.css"/>
@@ -12,88 +13,110 @@
         </style> 
     </h:head>
     <h:body>
-        <div class="row">
-            <div class="label" style="float: left; padding: 2px; width:100px;">Products</div>
-            <a href="transactions.xhtml" style="float: left; padding: 2px; width: 100px;"><button>Orders</button></a>
-            <a href="cart.xhtml" style="float: left; padding: 2px; width: 100px;"><button>Cart</button></a>
-            <a href="userinfo.xhtml" style="float: left; padding: 2px; width: 100px;"><button>User</button></a>
+        <div class="container">
+
+            <div class="row" style="width: 60%; margin: 0 auto; margin-bottom: 100px;">
+                <a href="products.xhtml" style="float: left; padding: 2px; width:15%;"><button>Products</button></a>
+                <a href="transactions.xhtml" style="float: left; padding: 2px; width: 15%;"><button>Orders</button></a>
+                <a href="cart.xhtml" style="float: left; padding: 2px; width: 15%;"><button>Cart</button></a>
+                <a href="userinfo.xhtml" style="float: left; padding: 2px; width: 15%;"><button>User</button></a>
+                <c:if test="#{indexManagedBean.isAdmin}">
+                    <a href="users.xhtml" style="float: left; padding: 2px; width: 15%;"><button>Users</button></a>
+                </c:if>
+            </div>
+
+            <div>
+                <h:outputText styleClass="title" value="#{indexManagedBean.email}"></h:outputText>
+            </div>
+
+            <h:form style="width: 100%;">
+                <div class="inputPanel" style="width: 50%; margin: 0 auto;">
+                    <div class="row">
+                        <div class="label"><span>Name</span></div>
+                        <h:inputText styleClass="input" value="#{productsManagedBean.inputProductName}"></h:inputText>
+                    </div>
+                    <div class="row">
+                        <div class="label"><span>Category</span></div>
+                        <h:inputText styleClass="input" value="#{productsManagedBean.inputProductCategory}"></h:inputText>
+                    </div>
+                    <div class="row">
+                        <div class="label"><span>Area</span></div>
+                        <h:inputText styleClass="input" value="#{productsManagedBean.inputProductArea}"></h:inputText>
+                    </div>
+                    <div class="row">
+                        <div class="label"><span>Price</span></div>
+                        <h:inputText styleClass="input" value="#{productsManagedBean.inputProductPrice}"></h:inputText>
+                    </div>
+                    <div class="row">
+                        <div class="label"><span>Inventory</span></div>
+                        <h:inputText styleClass="input" value="#{productsManagedBean.inputProductInventory}"></h:inputText>
+                    </div>
+                    <div class="row" style="margin-bottom:100px;">
+                        <div class="label"></div>
+                        <div class="buttons">
+                            <h:commandButton styleClass="button" style="float:left;margin-right:20px" value="Search" action="#{productsManagedBean.searchProduct}"></h:commandButton>
+                            <h:commandButton styleClass="button" style="float:left;margin-right:20px" value="View All" action="#{productsManagedBean.viewAllProducts}"></h:commandButton>
+                            <c:if test="#{indexManagedBean.isAdmin}">
+                                <h:commandButton styleClass="button" style="float:left;margin-right:20px" value="Add" action="#{productsManagedBean.addProduct}"></h:commandButton>
+                            </c:if>
+                            <c:if test="#{indexManagedBean.isAdmin}">
+                                <h:commandButton styleClass="button" style="float:left;margin-right:20px" value="Update" action="#{productsManagedBean.updateProduct}"></h:commandButton>
+                            </c:if>
+                        </div>
+                    </div>
+                </div>
+
+                <h:dataTable value="#{productsManagedBean.products}" var="product"
+                             styleClass="table"
+                             headerClass="table-header"
+                             rowClasses="table-odd-row,table-even-row">
+                    <h:column>            
+                        <f:facet name="header">ID</f:facet>            
+                            #{product.id}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Name</f:facet>
+                            #{product.name}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Category</f:facet>
+                            #{product.category}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Area</f:facet>
+                            #{product.area}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Price</f:facet>
+                            #{product.price}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Inventory</f:facet>
+                            #{product.inventory}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Detail</f:facet>
+                        <h:commandButton styleClass="button" value="Detail" action="productinfo">
+                            <f:param name="id" value="#{product.id}"/> 
+                        </h:commandButton>
+                    </h:column>
+                    <c:if test="#{indexManagedBean.moreThanVisitor}">
+                        <h:column>
+                            <f:facet name="header">Buy</f:facet>
+                            <h:commandButton styleClass="button" value="Add to Cart" action="#{cartManagedBean.addToCart(product)}"></h:commandButton>
+                        </h:column>
+                    </c:if>
+                    <c:if test="#{indexManagedBean.isAdmin}">
+                        <h:column>
+                            <f:facet name="header">Action</f:facet>
+                            <h:commandButton styleClass="button" value="Delete" action="#{productsManagedBean.deleteProduct(product)}"></h:commandButton>
+                        </h:column>
+                    </c:if>
+                </h:dataTable>
+
+            </h:form>
+
         </div>
-
-        <h:outputText styleClass="title" value="#{indexManagedBean.email}"></h:outputText>
-
-        <h:form>
-            <div class="row">
-                <div class="label">Name</div>
-                <h:inputText value="#{productsManagedBean.inputProductName}"></h:inputText>
-            </div>
-            <div class="row">
-                <div class="label">Category</div>
-                <h:inputText value="#{productsManagedBean.inputProductCategory}"></h:inputText>
-            </div>
-            <div class="row">
-                <div class="label">Area</div>
-                <h:inputText value="#{productsManagedBean.inputProductArea}"></h:inputText>
-            </div>
-            <div class="row">
-                <div class="label">Price</div>
-                <h:inputText value="#{productsManagedBean.inputProductPrice}"></h:inputText>
-            </div>
-            <div class="row">
-                <div class="label">Inventory</div>
-                <h:inputText value="#{productsManagedBean.inputProductInventory}"></h:inputText>
-            </div>
-            <div class="row">
-                <h:commandButton value="Search" action="#{productsManagedBean.searchProduct}"></h:commandButton>
-                <h:commandButton value="Restore" action="#{productsManagedBean.viewAllProducts}"></h:commandButton>
-            </div>
-
-            <h:dataTable value="#{productsManagedBean.products}" var="product"
-                         styleClass="table"
-                         headerClass="table-header"
-                         rowClasses="table-odd-row,table-even-row">
-                <h:column>            
-                    <f:facet name="header">ID</f:facet>            
-                        #{product.id}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Name</f:facet>
-                        #{product.name}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Category</f:facet>
-                        #{product.category}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Area</f:facet>
-                        #{product.area}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Price</f:facet>
-                        #{product.price}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Inventory</f:facet>
-                        #{product.inventory}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Action</f:facet>
-                    <h:commandButton value="Delete" action="#{productsManagedBean.deleteProduct(product)}"></h:commandButton>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Detail</f:facet>
-                    <h:commandButton value="Detail" action="productinfo">
-                        <f:param name="id" value="#{product.id}"/> 
-                    </h:commandButton>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Buy</f:facet>
-                    <h:commandButton value="Add to Cart" action="#{cartManagedBean.addToCart(product)}"></h:commandButton>
-                </h:column>
-
-            </h:dataTable>
-
-        </h:form>
-
     </h:body>
 </html>
 

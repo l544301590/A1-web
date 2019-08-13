@@ -8,29 +8,49 @@
         <h:outputStylesheet name="css/style.css"/>
     </h:head>
     <h:body>
-        <h:outputText styleClass="title" value="#{indexManagedBean.registerMessage}"></h:outputText>
-        
-        <h:form>
-            <div class="label">Email</div>
-            <h:inputText class="input" value="#{indexManagedBean.email}">
-                <f:validateRegex pattern="^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$" />
-            </h:inputText>
+        <div class="container" style="text-align: center;">
 
-            <div class="label">Password</div>
-            <h:inputSecret class="input" value="#{indexManagedBean.password}">
-                <f:validateRegex pattern="^(?=.*[a-zA-Z])(?=.*[1-9])(?=.*[\W]).{8,20}$" />
-            </h:inputSecret>
+            <div style="margin-top: 200px; margin-bottom: 100px;">
+                <h:outputText styleClass="title" value="#{indexManagedBean.registerMessage}"></h:outputText>
+            </div>
 
-            <div class="label">Repeat Password</div>
-            <h:inputSecret class="input" value="#{indexManagedBean.password}">
-                <f:validateRegex pattern="^(?=.*[a-zA-Z])(?=.*[1-9])(?=.*[\W]).{8,20}$" />
-            </h:inputSecret>
+            <h:form>
+                <div class="inputPanel" style="width: 50%; margin: 0 auto;">
 
-            <h:commandButton value="Register" action="#{indexManagedBean.register}"></h:commandButton>
-        </h:form>
-        
-        <h:link value="Go Login" outcome="index"></h:link>
-        
+                    <div class="row">
+                        <div class="label"><span>Email</span></div>
+                        <h:inputText styleClass="input" value="#{indexManagedBean.email}">
+                            <f:validateRegex pattern="^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$" />
+                        </h:inputText>
+                    </div>
+
+                    <div class="row">
+                        <div class="label"><span>Password</span></div>
+                        <h:inputSecret styleClass="input" value="#{indexManagedBean.password}">
+                            <f:validateRegex pattern="^(?=.*[a-zA-Z])(?=.*[1-9])(?=.*[\W]).{8,20}$" />
+                        </h:inputSecret>
+                    </div>
+
+                    <div class="row">
+                        <div class="label"><span>Repeat Password</span></div>
+                        <h:inputSecret styleClass="input" value="#{indexManagedBean.password}">
+                            <f:validateRegex pattern="^(?=.*[a-zA-Z])(?=.*[1-9])(?=.*[\W]).{8,20}$" />
+                        </h:inputSecret>
+                    </div>
+
+                    <div class="row">
+                        <div class="label"></div>
+                        <div class="buttons">
+                            <h:commandButton styleClass="button" value="Register" action="#{indexManagedBean.register}"></h:commandButton>
+                        </div>
+                    </div>
+
+                </div>
+            </h:form>
+
+            <h:link value="Go Login" outcome="index"></h:link>
+
+        </div>
     </h:body>
 </html>
 
