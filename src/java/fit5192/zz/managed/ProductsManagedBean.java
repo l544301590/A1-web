@@ -59,8 +59,6 @@ public class ProductsManagedBean {
         }
     }
 
-
-
     public void addProduct() {
         try {
             Product product = new Product(inputProductName, inputProductCategory, inputProductArea, inputProductPrice, inputProductInventory);
@@ -82,13 +80,22 @@ public class ProductsManagedBean {
         }
 
     }
-
+    
     public void updateProduct() {
 
     }
 
     public void searchProduct() {
-
+        Product product = new Product(inputProductName, inputProductCategory, inputProductArea, inputProductPrice, inputProductInventory);
+        this.products = productRepository.searchProductByAnyAttribute(product);
+    }
+    
+    public void viewAllProducts() {
+        try {
+            this.products = productRepository.getAllProducts();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void addToCart(Product product) {
@@ -96,12 +103,12 @@ public class ProductsManagedBean {
         CartManagedBean cartManagedBean = (CartManagedBean) FacesContext.getCurrentInstance().getApplication().getELResolver().getValue(context, null, "cartManagedBean");
         cartManagedBean.addToCart(product);
     }
-    
+
     public void goToDetail(Product product) {
-        
+
     }
-    
-        public List<Product> getProducts() {
+
+    public List<Product> getProducts() {
         return products;
     }
 

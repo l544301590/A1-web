@@ -13,6 +13,7 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.el.ELContext;
 import javax.faces.bean.ManagedBean;
@@ -37,8 +38,16 @@ public class TransactionsManagedBean implements Serializable {
         ELContext context = FacesContext.getCurrentInstance().getELContext();
         IndexManagedBean app = (IndexManagedBean) FacesContext.getCurrentInstance().getApplication().getELResolver().getValue(context, null, "indexManagedBean");
         user = app.getUser();
-        
-        // TODO getTransactionByUserId
+    }
+    
+    @PostConstruct
+    public void initTransactions() {
+        transactions = transactionRepository.SearchTransactionsByUserId(user.getId());
+//        try {
+//            transactions = transactionRepository.getAllTransactions();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     public List<Transaction_> getTransactions() {
