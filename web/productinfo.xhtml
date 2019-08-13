@@ -4,8 +4,11 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
         <title>Facelet Title</title>
+        <h:outputStylesheet name="css/style.css"/>
     </h:head>
     <h:body>
+        <h:outputText styleClass="title" value="#{indexManagedBean.email}"></h:outputText>
+        
         <h:outputText value="#{productInfoManagedBean.id}"></h:outputText>
         <h:outputText value="#{productInfoManagedBean.name}"></h:outputText>
         <h:outputText value="#{productInfoManagedBean.category}"></h:outputText>

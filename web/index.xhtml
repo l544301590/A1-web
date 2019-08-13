@@ -5,26 +5,32 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
+        <h:outputStylesheet name="css/style.css"/>
     </h:head>
     <h:body>
+        <h:outputText styleClass="title" value="#{indexManagedBean.loginMessage}"></h:outputText>
         <h:form>
-            <h:outputText value="#{indexManagedBean.loginMessage}"></h:outputText>
-            
-            <div class="label">Email</div>
-            <h:inputText class="input" value="#{indexManagedBean.email}">
-                <f:validateRegex pattern="^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$" />
-            </h:inputText>
-            
-            <div class="label">Password</div>
-            <h:inputSecret class="input" value="#{indexManagedBean.password}">
-                <f:validateRegex pattern="^(?=.*[a-zA-Z])(?=.*[1-9])(?=.*[\W]).{8,20}$" />
-            </h:inputSecret>
-            
-            <h:commandButton value="Login" action="#{indexManagedBean.login}"></h:commandButton>
+
+            <div style="margin-top: 30px;">
+                <div class="label">Email</div>
+                <h:inputText class="input" value="#{indexManagedBean.email}">
+                    <f:validateRegex pattern="^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$" />
+                </h:inputText>
+                
+                <div class="label">Password</div>
+                <h:inputSecret class="input" value="#{indexManagedBean.password}">
+                    <f:validateRegex pattern="^(?=.*[a-zA-Z])(?=.*[1-9])(?=.*[\W]).{8,20}$" />
+                </h:inputSecret>
+
+                <div>
+                    <h:commandButton value="Login" action="#{indexManagedBean.login}"></h:commandButton>
+                </div>
+                
+            </div>
         </h:form>
-        
+
         <h:link value="Go Register" outcome="register"></h:link>
-            
+
     </h:body>
 </html>
 

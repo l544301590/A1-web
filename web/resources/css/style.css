@@ -1,0 +1,45 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2019-8-12, 14:04:18
+    Author     : dylan
+*/
+
+/* Main Sections */  
+body { 
+    background: #b8edff; 
+    font-family: sansserif; 
+/*    margin: auto;
+    height: 100%;*/
+}
+.row {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.label {
+    font-size: 14px;
+    padding: 3px;
+}
+button {
+    font-size: 14px;
+    border-radius: 3px;
+}
+.title {
+    padding: 20px; background-color: #57d5ff; border-radius: 3px; font-size: 20px; margin-top: 100px;
+}
+.table-header{
+  bbook-bottom:1px solid #FFF;
+  padding:16px;
+}
+
+.table-odd-row{
+  bbook-top:1px solid #FFF;
+}
+
+.table-even-row{
+  bbook-top:1px solid #FFF;
+}
+

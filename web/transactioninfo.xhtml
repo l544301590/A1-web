@@ -5,12 +5,17 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
+        <h:outputStylesheet name="css/style.css"/>
     </h:head>
     <h:body>
+        <h:outputText styleClass="title" value="#{indexManagedBean.email}"></h:outputText>
         <h:outputText value="#{transactionInfoManagedBean.id}"></h:outputText>
         <h:outputText value="#{transactionInfoManagedBean.date}"></h:outputText>
         <h:form>
-            <h:dataTable value="#{transactionInfoManagedBean.products}" var="product">
+            <h:dataTable value="#{transactionInfoManagedBean.products}" var="product"
+                         styleClass="table"
+                         headerClass="table-header"
+                         rowClasses="table-odd-row,table-even-row">
                 <h:column>
                     <f:facet name="header">ID</f:facet>            
                         #{product.id}
