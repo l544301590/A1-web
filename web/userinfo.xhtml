@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
         <h:outputStylesheet name="css/style.css"/>
@@ -13,6 +14,55 @@
             <a href="cart.xhtml" style="float: left; padding: 2px; width: 100px;"><button>Cart</button></a>
             <div class="label" style="float: left; padding: 2px; width: 100px;">User</div>
         </div>
+        <h:outputText styleClass="title" value="#{userInfoManagedBean.updateUserInfoMessage}"></h:outputText>
+         <h:form>
+            <div class="row">
+                <div class="label">ID</div>
+                <h:inputText value="#{userInfoManagedBean.id}" readonly = "true"></h:inputText>
+            </div>
+            <div class="row">
+                <div class="label">Email</div>
+                <h:inputText value="#{userInfoManagedBean.email}" readonly = "true"></h:inputText>
+            </div>
+            <div class="row">
+                <div class="label">Password</div>
+                <h:inputText value="#{userInfoManagedBean.password}" readonly = "true"></h:inputText>
+            </div>
+            <div class="row">
+                <div class="label">Nickname</div>
+                <h:inputText value="#{userInfoManagedBean.nickname}"></h:inputText>
+            </div>
+            <div class="row">
+                <div class="label">Level</div>
+                <h:inputText value="#{userInfoManagedBean.level}" readonly = "true"></h:inputText>
+            </div>
+            <div class="row">
+                <div class="label">FirstName</div>
+                <h:inputText value="#{userInfoManagedBean.firstName}">
+                <f:validateRegex pattern="^[a-zA-Z]+$"/>
+                </h:inputText>
+            </div>
+            <div class="row">
+                <div class="label">LastName</div>
+                <h:inputText value="#{userInfoManagedBean.lastName}">
+                <f:validateRegex pattern="^[a-zA-Z]+$"/>  
+                </h:inputText>
+            </div>
+            <div class="row">
+                <div class="label">Address</div>
+                <h:inputText value="#{userInfoManagedBean.address}"></h:inputText>
+            </div>
+            <div class="row">
+                <div class="label">Phone</div>
+                <h:inputText value="#{userInfoManagedBean.phone}">
+                <f:validateRegex pattern="(^[9][0-9]{8}$|^[0][0-9]{9}$)"/>
+                </h:inputText>
+            </div>
+            <div class="row">
+                <h:commandButton value="Update" action="#{userInfoManagedBean.updateUser}"></h:commandButton>
+                <h:commandButton value="Change Level" action="#{userInfoManagedBean.changeLevel}"></h:commandButton>
+            </div>
+        </h:form> 
     </h:body>
     
 </html>
