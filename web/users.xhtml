@@ -11,13 +11,11 @@
         <div class="container">
 
             <div class="row" style="width: 60%; margin: 0 auto; margin-bottom: 100px;">
-                <a href="products.xhtml" style="float: left; padding: 2px; width:15%;"><button>Products</button></a>
+                <a href="products.xhtml" style="float: left; padding: 2px; width: 15%;"><button>Products</button></a>
                 <a href="transactions.xhtml" style="float: left; padding: 2px; width: 15%;"><button>Orders</button></a>
                 <a href="cart.xhtml" style="float: left; padding: 2px; width: 15%;"><button>Cart</button></a>
                 <a href="userinfo.xhtml" style="float: left; padding: 2px; width: 15%;"><button>User</button></a>
-                <c:if test="#{indexManagedBean.isAdmin}">
-                    <a href="users.xhtml" style="float: left; padding: 2px; width: 15%;"><button>Users</button></a>
-                </c:if>
+                <a href="users.xhtml" style="float: left; padding: 2px; width: 15%;"><button>Users</button></a>
             </div>
             
             <div>

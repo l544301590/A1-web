@@ -8,29 +8,33 @@
         <h:outputStylesheet name="css/style.css"/>
     </h:head>
     <h:body>
-        <h:outputText styleClass="title" value="#{indexManagedBean.email}"></h:outputText>
-        <h:outputText value="#{transactionInfoManagedBean.id}"></h:outputText>
-        <h:outputText value="#{transactionInfoManagedBean.date}"></h:outputText>
-        <h:form>
-            <h:dataTable value="#{transactionInfoManagedBean.products}" var="product"
-                         styleClass="table"
-                         headerClass="table-header"
-                         rowClasses="table-odd-row,table-even-row">
-                <h:column>
-                    <f:facet name="header">ID</f:facet>            
-                        #{product.id}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Name</f:facet>
-                        #{product.name}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Price</f:facet>
-                        #{product.price}
-                </h:column>
-            </h:dataTable>
-        </h:form>
-        <h:link value="Return to Fruit List" outcome="products"></h:link>
+        <div class="container">
+
+            <h:outputText styleClass="title" value="#{indexManagedBean.email}"></h:outputText>
+            <h:outputText value="#{transactionInfoManagedBean.id}"></h:outputText>
+            <h:outputText value="#{transactionInfoManagedBean.date}"></h:outputText>
+            <h:form>
+                <h:dataTable value="#{transactionInfoManagedBean.products}" var="product"
+                             styleClass="table"
+                             headerClass="table-header"
+                             rowClasses="table-odd-row,table-even-row">
+                    <h:column>
+                        <f:facet name="header">ID</f:facet>            
+                            #{product.id}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Name</f:facet>
+                            #{product.name}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Price</f:facet>
+                            #{product.price}
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+            <h:link value="Return to Orders List" outcome="transactions"></h:link>
+
+        </div>
     </h:body>
 </html>
 
