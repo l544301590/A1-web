@@ -6,6 +6,7 @@
 package fit5192.zz.managed;
 
 import fit5192.zz.repository.ProductRepository;
+import fit5192.zz.repository.RatingRepository;
 import fit5192.zz.repository.entities.Product;
 import fit5192.zz.repository.entities.Rating;
 import java.util.List;
@@ -30,7 +31,9 @@ public class ProductInfoManagedBean {
 
     @EJB
     private ProductRepository productRepository;
-    
+    @EJB
+    private RatingRepository ratingRepository;
+
     private int id;
     private String name;  // full name, including category name
 //    private String imgPath;
@@ -40,18 +43,26 @@ public class ProductInfoManagedBean {
     private int inventory;
     private String description;
     private List<Rating> ratings;
-    
+
+    private String inputRating;
+    private String inputComment;
+
     private Product currentProduct;
-    
+
     public ProductInfoManagedBean() {
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest(); 
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String idString = request.getParameter("id");
-        if (!idString.isEmpty()){
-            this.id = Integer.parseInt(idString); 
+        if (!idString.isEmpty()) {
+            this.id = Integer.parseInt(idString);
         }
     }
-    
+
     @PostConstruct
+    public void initProductInfoAndRatings() {
+        initProductInfo();;
+        initRatings();
+    }
+
     public void initProductInfo() {
         try {
             Product product = productRepository.searchProductById(id);
@@ -68,10 +79,33 @@ public class ProductInfoManagedBean {
         }
     }
     
+    public void initRatings() {
+        try {
+            ratings = ratingRepository.searchRatingsByProductId(currentProduct.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void addToCart() {
         ELContext context = FacesContext.getCurrentInstance().getELContext();
         CartManagedBean cartManagedBean = (CartManagedBean) FacesContext.getCurrentInstance().getApplication().getELResolver().getValue(context, null, "cartManagedBean");
         cartManagedBean.addToCart(currentProduct);
+    }
+
+    public String addComment() {
+        if (inputRating.length() > 0) {
+            ELContext context = FacesContext.getCurrentInstance().getELContext();
+            IndexManagedBean indexManagedBean = (IndexManagedBean) FacesContext.getCurrentInstance().getApplication().getELResolver().getValue(context, null, "indexManagedBean");
+            Rating rating = new Rating(Integer.parseInt(inputRating), inputComment, currentProduct, indexManagedBean.getUser());
+            try {
+                ratingRepository.addRating(rating);
+                initRatings();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return "productinfo";
     }
 
     public int getId() {
@@ -137,5 +171,21 @@ public class ProductInfoManagedBean {
     public void setRatings(List<Rating> ratings) {
         this.ratings = ratings;
     }
-    
+
+    public String getInputRating() {
+        return inputRating;
+    }
+
+    public void setInputRating(String inputRating) {
+        this.inputRating = inputRating;
+    }
+
+    public String getInputComment() {
+        return inputComment;
+    }
+
+    public void setInputComment(String inputComment) {
+        this.inputComment = inputComment;
+    }
+
 }
