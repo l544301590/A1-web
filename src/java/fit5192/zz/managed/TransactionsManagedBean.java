@@ -16,6 +16,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.el.ELContext;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
@@ -25,7 +26,7 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @Named(value = "transactionsManagedBean")
-@SessionScoped
+@ApplicationScoped
 public class TransactionsManagedBean implements Serializable {
 
     private List<Transaction_> transactions;

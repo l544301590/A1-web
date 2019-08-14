@@ -48,7 +48,7 @@ public class CartManagedBean implements Serializable {
     public CartManagedBean() {
         this.cart = new HashMap<>();
         this.cartList = new ArrayList<>();
-        
+
         ELContext context = FacesContext.getCurrentInstance().getELContext();
         IndexManagedBean app = (IndexManagedBean) FacesContext.getCurrentInstance().getApplication().getELResolver().getValue(context, null, "indexManagedBean");
         this.user = app.getUser();
@@ -87,13 +87,16 @@ public class CartManagedBean implements Serializable {
 
         try {
             transactionRepository.addTransaction(transaction);
+            ELContext context = FacesContext.getCurrentInstance().getELContext();
+            TransactionsManagedBean transactionsManagedBean = (TransactionsManagedBean) FacesContext.getCurrentInstance().getApplication().getELResolver().getValue(context, null, "transactionsManagedBean");
+            transactionsManagedBean.initTransactions();
             return "transactions";
         } catch (Exception e) {
             e.printStackTrace();
             return "cart";
         }
     }
-    
+
     public void addToCart(Product product) {
         if (this.cart.containsKey(product)) {
             this.cart.put(product, this.cart.get(product) + 1);
@@ -102,11 +105,11 @@ public class CartManagedBean implements Serializable {
             this.cartList.add(product);
         }
     }
-    
+
     public void addNum(Product product) {
         this.cart.put(product, this.cart.get(product) + 1);
     }
-    
+
     public void subNum(Product product) {
         int currentNum = this.cart.get(product);
         this.cart.put(product, currentNum - 1);
@@ -136,5 +139,4 @@ public class CartManagedBean implements Serializable {
         return user;
     }
 
-    
 }

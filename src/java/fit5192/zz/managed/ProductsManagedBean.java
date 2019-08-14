@@ -53,7 +53,7 @@ public class ProductsManagedBean {
     @PostConstruct
     public void initTable() {
         try {
-            products = productRepository.getAllProducts();
+            products = productRepository.getAllProductsSorted(user);
         } catch (Exception e) {
             e.printStackTrace();
         }
