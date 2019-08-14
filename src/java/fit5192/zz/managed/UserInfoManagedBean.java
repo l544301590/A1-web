@@ -52,12 +52,13 @@ public class UserInfoManagedBean {
     public void initUser() {
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String idString = request.getParameter("id");
+        System.out.println("除非request中的id:"+idString);
         if (!idString.isEmpty()) {
             int id = Integer.parseInt(idString);
-            System.out.println("Id为空？" + id);
+//            System.out.println("Id为空？" + id);
             try {
                 this.user = userRepository.searchUserById(115);
-                System.out.println("找出来的user" + user);
+//                System.out.println("找出来的user" + user);
             } catch (Exception ex) {
                 Logger.getLogger(UserInfoManagedBean.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -83,6 +84,23 @@ public class UserInfoManagedBean {
     //所以不应该有两个user变量 刷新什么
     public String updateUser() {
         User_ user = createNewUser();
+        /*
+        if(user.getLevel()<3){
+            if(isEmpty(user.getLastName())){
+                this.updateUserInfoMessage = "Need to fill in Lastname to upgrade";
+            }
+            if(isEmpty(user.getFirstName())){
+                this.updateUserInfoMessage = "Need to fill in Firstname to upgrade";
+            }
+            if(isEmpty(user.getAddress())){
+                this.updateUserInfoMessage = "Need to fill in Address to upgrade";
+            }
+            if(isEmpty(user.getPhone())){
+                this.updateUserInfoMessage = "Need to fill in Phone to upgrade";
+            }
+            return "userinfo";
+        }
+       */
         try {
             userRepository.updateUser(user);
         } catch (Exception ex) {
@@ -122,6 +140,18 @@ public class UserInfoManagedBean {
             user.setPhone(phone);
         }
         return user;
+    }
+    public static boolean isEmpty(String str) {
+    int strLen;
+    if (str == null || (strLen = str.length()) == 0||str==" ") {
+        return true;
+    }
+    for (int i = 0; i < strLen; i++) {
+        if ((Character.isWhitespace(str.charAt(i)) == false)) {
+            return false;
+        }
+    }
+    return true;
     }
 
     public String getId() {
