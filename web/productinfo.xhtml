@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
         <h:outputStylesheet name="css/style.css"/>
@@ -11,23 +12,63 @@
         <div class="container">
 
             <h:outputText styleClass="title" value="#{indexManagedBean.email}"></h:outputText>
-
-            <h:outputText value="#{productInfoManagedBean.id}"></h:outputText>
-            <h:outputText value="#{productInfoManagedBean.name}"></h:outputText>
-            <h:outputText value="#{productInfoManagedBean.category}"></h:outputText>
-            <h:outputText value="#{productInfoManagedBean.area}"></h:outputText>
-            <h:outputText value="#{productInfoManagedBean.price}"></h:outputText>
-            <h:outputText value="#{productInfoManagedBean.inventory}"></h:outputText>
-            <h:outputText value="#{productInfoManagedBean.description}"></h:outputText>
-
+            <div class="row">
+                <div class="label"><span>ID</span></div>
+                <h:outputText styleClass="input" value="#{productInfoManagedBean.id}"></h:outputText>
+            </div>
+            <div class="row">
+                <div class="label"><span>Name</span></div>
+                <h:outputText styleClass="input" value="#{productInfoManagedBean.name}"></h:outputText>
+            </div>
+            <div class="row">
+                <div class="label"><span>Category</span></div>
+                <h:outputText styleClass="input" value="#{productInfoManagedBean.category}"></h:outputText>
+            </div>
+            <div class="row">
+                <div class="label"><span>Area</span></div>
+                <h:outputText styleClass="input" value="#{productInfoManagedBean.area}"></h:outputText>
+            </div>
+            <div class="row">
+                <div class="label"><span>Price</span></div>
+                <h:outputText styleClass="input" value="#{productInfoManagedBean.price}"></h:outputText>
+            </div>
+            <div class="row">
+                <div class="label"><span>Inventory</span></div>
+                <h:outputText styleClass="input" value="#{productInfoManagedBean.inventory}"></h:outputText>
+            </div>
+            <div class="row">
+                <div class="label"><span>Description</span></div>
+                <h:outputText styleClass="input" value="#{productInfoManagedBean.description}"></h:outputText>
+            </div>
+            
             <h:form>
-                <c:if test="#{indexManagedBean.moreThanVisitor}">
-                    <h:commandButton styleClass="button" value="Add to Cart" action="#{productInfoManagedBean.addToCart}"></h:commandButton>
-                </c:if>
-                <h:commandButton styleClass="button" value="Back to Product List" action="products"></h:commandButton>
-                <h:commandButton styleClass="button" value="Go to Cart" action="cart"></h:commandButton>
+                <div class="row">
+                    <c:if test="#{indexManagedBean.moreThanVisitor}">
+                        <h:commandButton styleClass="button" style="float:left;margin-right:20px" value="Add to Cart" action="#{productInfoManagedBean.addToCart}"></h:commandButton>
+                    </c:if>
+                    <h:commandButton styleClass="button" style="float:left;margin-right:20px" value="Back to Product List" action="products"></h:commandButton>
+                    <h:commandButton styleClass="button" style="float:left;margin-right:20px" value="Go to Cart" action="cart"></h:commandButton>
+                </div>
+
+                <div class="label">Add Comment</div>
+                <h:inputText value="#{productInfoManagedBean.inputRating}"></h:inputText>
+                <h:inputTextarea value="#{productInfoManagedBean.inputComment}"></h:inputTextarea>
+                <h:commandButton value="Add Comment" action="#{productInfoManagedBean.addComment}"></h:commandButton>
             </h:form>
 
+            <h:dataTable value="#{productInfoManagedBean.ratings}" var="rating"
+                         styleClass="table"
+                         headerClass="table-header"
+                         rowClasses="table-odd-row,table-even-row">
+                <h:column>            
+                    <f:facet name="header">Comment</f:facet>            
+                        #{rating.comment}
+                </h:column>
+                <h:column>            
+                    <f:facet name="header">Rating</f:facet>            
+                        #{rating.value}
+                </h:column>
+            </h:dataTable>
         </div>
     </h:body>
 </html>
