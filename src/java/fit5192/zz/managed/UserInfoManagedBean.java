@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.el.ELContext;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -24,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @ManagedBean
 @Named(value = "userInfoManagedBean")
-@SessionScoped
+@RequestScoped
 public class UserInfoManagedBean {
 
     @EJB
@@ -45,49 +46,71 @@ public class UserInfoManagedBean {
     private User_ user;
 
     public UserInfoManagedBean() {
-
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String idString = request.getParameter("id");
+        System.out.println("Id为空？" + idString);
+        this.id = idString;
     }
 
     @PostConstruct
     public void initUser() {
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        String idString = request.getParameter("id");
-        idString = idString == null ? "" : idString;
-        if (!idString.isEmpty()) {
-            int id = Integer.parseInt(idString);
-            System.out.println("Id为空？" + id);
-            try {
-                this.user = userRepository.searchUserById(115);
-                System.out.println("找出来的user" + user);
-            } catch (Exception ex) {
-                Logger.getLogger(UserInfoManagedBean.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-            ELContext context = FacesContext.getCurrentInstance().getELContext();
-            IndexManagedBean app = (IndexManagedBean) FacesContext.getCurrentInstance().getApplication().getELResolver().getValue(context, null, "indexManagedBean");
-            user = app.getUser();
+        ELContext context = FacesContext.getCurrentInstance().getELContext();
+        IndexManagedBean app = (IndexManagedBean) FacesContext.getCurrentInstance().getApplication().getELResolver().getValue(context, null, "indexManagedBean");
+        this.user = app.getUser();
+        try {
+            this.user = userRepository.searchUserById(Integer.parseInt(this.id));
+//                System.out.println("找出来的user" + user);
+        } catch (Exception ex) {
+            Logger.getLogger(UserInfoManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         this.id = String.valueOf(user.getId());
+
         this.email = user.getEmail();
+
         this.nickname = user.getNickname();
+
         this.password = user.getPassword();
+
         this.level = String.valueOf(user.getLevel());
+
         this.lastName = user.getLastName();
+
         this.firstName = user.getFirstName();
+
         this.address = user.getAddress();
+
         this.phone = user.getPhone();
     }
 
-    //1 show the info of current user
-    //2 get the userInfo changed
-    //3 user the userRepository.upadate the user
-    //所以不应该有两个user变量 刷新什么
+//1 show the info of current user
+//2 get the userInfo changed
+//3 user the userRepository.upadate the user
+//所以不应该有两个user变量 刷新什么
     public String updateUser() {
         User_ user = createNewUser();
+
+        if (user.getLevel() < 3) {
+            if (isEmpty(user.getLastName())) {
+                this.updateUserInfoMessage = "Need to fill in Lastname to upgrade";
+            }
+            if (isEmpty(user.getFirstName())) {
+                this.updateUserInfoMessage = "Need to fill in Firstname to upgrade";
+            }
+            if (isEmpty(user.getAddress())) {
+                this.updateUserInfoMessage = "Need to fill in Address to upgrade";
+            }
+            if (isEmpty(user.getPhone())) {
+                this.updateUserInfoMessage = "Need to fill in Phone to upgrade";
+            }
+            return "userinfo";
+        }
         try {
             userRepository.updateUser(user);
+
         } catch (Exception ex) {
-            Logger.getLogger(UserInfoManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserInfoManagedBean.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         this.updateUserInfoMessage = "Update successfully";
         return "userinfo";
@@ -123,6 +146,19 @@ public class UserInfoManagedBean {
             user.setPhone(phone);
         }
         return user;
+    }
+
+    public static boolean isEmpty(String str) {
+        int strLen;
+        if (str == null || (strLen = str.length()) == 0 || str == " ") {
+            return true;
+        }
+        for (int i = 0; i < strLen; i++) {
+            if ((Character.isWhitespace(str.charAt(i)) == false)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public String getId() {
