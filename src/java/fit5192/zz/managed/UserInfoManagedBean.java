@@ -16,6 +16,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -25,34 +26,51 @@ import javax.inject.Named;
 @Named(value = "userInfoManagedBean")
 @SessionScoped
 public class UserInfoManagedBean {
+
     @EJB
     private UserRepository userRepository;
-    
+
     private String updateUserInfoMessage = "The User Information";
-    
-    private int id;
+
+    private String id;
     private String email;
     private String nickname;
-    private String password ;
-    private int level;
+    private String password;
+    private String level;
     private String lastName;
     private String firstName;
     private String address;
     private String phone;
-    
+
     private User_ user;
 
     public UserInfoManagedBean() {
-        ELContext context = FacesContext.getCurrentInstance().getELContext();
-        IndexManagedBean app = (IndexManagedBean) FacesContext.getCurrentInstance().getApplication().getELResolver().getValue(context, null, "indexManagedBean");
-        user = app.getUser();
-        System.err.println("11111111111111111111111");
-        this.id = user.getId();
-        System.err.println(this.id);
+
+    }
+
+    @PostConstruct
+    public void initUser() {
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String idString = request.getParameter("id");
+        if (!idString.isEmpty()) {
+            int id = Integer.parseInt(idString);
+            System.out.println("Id为空？" + id);
+            try {
+                this.user = userRepository.searchUserById(115);
+                System.out.println("找出来的user" + user);
+            } catch (Exception ex) {
+                Logger.getLogger(UserInfoManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            ELContext context = FacesContext.getCurrentInstance().getELContext();
+            IndexManagedBean app = (IndexManagedBean) FacesContext.getCurrentInstance().getApplication().getELResolver().getValue(context, null, "indexManagedBean");
+            user = app.getUser();
+        }
+        this.id = String.valueOf(user.getId());
         this.email = user.getEmail();
         this.nickname = user.getNickname();
         this.password = user.getPassword();
-        this.level = user.getLevel();
+        this.level = String.valueOf(user.getLevel());
         this.lastName = user.getLastName();
         this.firstName = user.getFirstName();
         this.address = user.getAddress();
@@ -63,18 +81,50 @@ public class UserInfoManagedBean {
     //2 get the userInfo changed
     //3 user the userRepository.upadate the user
     //所以不应该有两个user变量 刷新什么
-
-    public String updateUser(){
-        User_ user = new User_(nickname,lastName,firstName,address,phone);//这里是不是应该用this.user 方便页面的自动更行
+    public String updateUser() {
+        User_ user = createNewUser();
         try {
             userRepository.updateUser(user);
         } catch (Exception ex) {
-            this.updateUserInfoMessage = ex.getMessage();
+            Logger.getLogger(UserInfoManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.updateUserInfoMessage = "Update successfully";
         return "userinfo";
     }
-    public int getId() {
+
+    public User_ createNewUser() {
+        User_ user = new User_();
+        if (this.id.length() > 0) {
+            user.setId(Integer.parseInt(id));
+        }
+        if (this.email.length() > 0) {
+            user.setEmail(email);
+        }
+        if (this.nickname.length() > 0) {
+            user.setNickname(nickname);
+        }
+        if (this.password.length() > 0) {
+            user.setPassword(password);
+        }
+        if (this.level.length() > 0) {
+            user.setLevel(Integer.parseInt(level));
+        }
+        if (this.lastName.length() > 0) {
+            user.setLastName(lastName);
+        }
+        if (this.firstName.length() > 0) {
+            user.setFirstName(firstName);
+        }
+        if (this.address.length() > 0) {
+            user.setAddress(address);
+        }
+        if (this.phone.length() > 0) {
+            user.setPhone(phone);
+        }
+        return user;
+    }
+
+    public String getId() {
         return id;
     }
 
@@ -86,8 +136,12 @@ public class UserInfoManagedBean {
         this.nickname = nickname;
     }
 
-    public int getLevel() {
+    public String getLevel() {
         return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
     }
 
     public String getLastName() {
@@ -145,7 +199,5 @@ public class UserInfoManagedBean {
     public void setUpdateUserInfoMessage(String updateUserInfoMessage) {
         this.updateUserInfoMessage = updateUserInfoMessage;
     }
-    
-    
-    
+
 }
