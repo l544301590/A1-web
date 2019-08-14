@@ -20,7 +20,7 @@ import javax.inject.Named;
 
 /**
  *
- * @author Zheng R
+ * @author Zheng Ru
  */
 /*
 要实现功能：addUsersearchUsers deleteUser detail search（转到具体的info界面）进行修改
