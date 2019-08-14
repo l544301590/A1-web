@@ -9,10 +9,17 @@
     </h:head>
     <h:body>
         <div class="container">
-
-            <h:outputText styleClass="title" value="#{indexManagedBean.email}"></h:outputText>
-            <h:outputText value="#{transactionInfoManagedBean.id}"></h:outputText>
-            <h:outputText value="#{transactionInfoManagedBean.date}"></h:outputText>
+            <div class="row">
+                <h:outputText styleClass="email" value="#{indexManagedBean.email}"></h:outputText>
+            </div>
+            <div class="row">
+                <div class="label">ID</div>
+                <h:outputText styleClass="output" value="#{transactionInfoManagedBean.id}"></h:outputText>
+            </div>
+            <div class="row">
+                <div class="label">Date</div>
+                <h:outputText styleClass="output" value="#{transactionInfoManagedBean.date}"></h:outputText>
+            </div>
             <h:form>
                 <h:dataTable value="#{transactionInfoManagedBean.products}" var="product"
                              styleClass="table"
@@ -32,7 +39,7 @@
                     </h:column>
                 </h:dataTable>
             </h:form>
-            <h:link value="Return to Orders List" outcome="transactions"></h:link>
+            <h:link value="Return to Orders List" outcome="transactions" style="float:right;"></h:link>
 
         </div>
     </h:body>

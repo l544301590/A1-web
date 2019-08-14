@@ -7,62 +7,53 @@
     <h:head>
         <title>Facelet Title</title>
         <h:outputStylesheet name="css/style.css"/>
-        <style type="text/css"> 
-            h1{color:red} 
-            p{color:blue}
-        </style> 
     </h:head>
     <h:body>
         <div class="container">
 
-            <div class="row" style="width: 60%; margin: 0 auto; margin-bottom: 100px;">
-                <a href="products.xhtml" style="float: left; padding: 2px; width:15%;"><button>Products</button></a>
-                <a href="transactions.xhtml" style="float: left; padding: 2px; width: 15%;"><button>Orders</button></a>
-                <a href="cart.xhtml" style="float: left; padding: 2px; width: 15%;"><button>Cart</button></a>
-                <a href="userinfo.xhtml" style="float: left; padding: 2px; width: 15%;"><button>User</button></a>
+            <div class="row" style="margin-bottom: 50px;">
+                <a href="products.xhtml" class="tab"><button>Products</button></a>
+                <a href="transactions.xhtml" class="tab"><button>Orders</button></a>
+                <a href="cart.xhtml" class="tab"><button>Cart</button></a>
+                <a href="userinfo.xhtml" class="tab"><button>User</button></a>
                 <c:if test="#{indexManagedBean.isAdmin}">
-                    <a href="users.xhtml" style="float: left; padding: 2px; width: 15%;"><button>Users</button></a>
+                    <a href="users.xhtml" class="tab"><button>Users</button></a>
                 </c:if>
+                <h:outputText styleClass="email" value="#{indexManagedBean.email}"></h:outputText>
             </div>
 
-            <div>
-                <h:outputText styleClass="title" value="#{indexManagedBean.email}"></h:outputText>
-            </div>
-
-            <h:form style="width: 100%;">
-                <div class="inputPanel" style="width: 50%; margin: 0 auto;">
-                    <div class="row">
-                        <div class="label"><span>Name</span></div>
-                        <h:inputText styleClass="input" value="#{productsManagedBean.inputProductName}"></h:inputText>
-                    </div>
-                    <div class="row">
-                        <div class="label"><span>Category</span></div>
-                        <h:inputText styleClass="input" value="#{productsManagedBean.inputProductCategory}"></h:inputText>
-                    </div>
-                    <div class="row">
-                        <div class="label"><span>Area</span></div>
-                        <h:inputText styleClass="input" value="#{productsManagedBean.inputProductArea}"></h:inputText>
-                    </div>
-                    <div class="row">
-                        <div class="label"><span>Price</span></div>
-                        <h:inputText styleClass="input" value="#{productsManagedBean.inputProductPrice}"></h:inputText>
-                    </div>
-                    <div class="row">
-                        <div class="label"><span>Inventory</span></div>
-                        <h:inputText styleClass="input" value="#{productsManagedBean.inputProductInventory}"></h:inputText>
-                    </div>
-                    <div class="row" style="margin-bottom:100px;">
-                        <div class="label"></div>
-                        <div class="buttons">
-                            <h:commandButton styleClass="button" style="float:left;margin-right:20px" value="Search" action="#{productsManagedBean.searchProduct}"></h:commandButton>
-                            <h:commandButton styleClass="button" style="float:left;margin-right:20px" value="View All" action="#{productsManagedBean.viewAllProducts}"></h:commandButton>
-                            <c:if test="#{indexManagedBean.isAdmin}">
-                                <h:commandButton styleClass="button" style="float:left;margin-right:20px" value="Add" action="#{productsManagedBean.addProduct}"></h:commandButton>
-                            </c:if>
-                            <c:if test="#{indexManagedBean.isAdmin}">
-                                <h:commandButton styleClass="button" style="float:left;margin-right:20px" value="Update" action="#{productsManagedBean.updateProduct}"></h:commandButton>
-                            </c:if>
-                        </div>
+            <h:form>
+                <div class="row">
+                    <div class="label"><span>Name</span></div>
+                    <h:inputText styleClass="input" value="#{productsManagedBean.inputProductName}"></h:inputText>
+                </div>
+                <div class="row">
+                    <div class="label"><span>Category</span></div>
+                    <h:inputText styleClass="input" value="#{productsManagedBean.inputProductCategory}"></h:inputText>
+                </div>
+                <div class="row">
+                    <div class="label"><span>Area</span></div>
+                    <h:inputText styleClass="input" value="#{productsManagedBean.inputProductArea}"></h:inputText>
+                </div>
+                <div class="row">
+                    <div class="label"><span>Price</span></div>
+                    <h:inputText styleClass="input" value="#{productsManagedBean.inputProductPrice}"></h:inputText>
+                </div>
+                <div class="row">
+                    <div class="label"><span>Inventory</span></div>
+                    <h:inputText styleClass="input" value="#{productsManagedBean.inputProductInventory}"></h:inputText>
+                </div>
+                <div class="row">
+                    <div class="label"></div>
+                    <div class="buttons">
+                        <h:commandButton styleClass="button" style="float:left;" value="Search" action="#{productsManagedBean.searchProduct}"></h:commandButton>
+                        <h:commandButton styleClass="button" style="float:left;" value="View All" action="#{productsManagedBean.viewAllProducts}"></h:commandButton>
+                        <c:if test="#{indexManagedBean.isAdmin}">
+                            <h:commandButton styleClass="button" style="float:left;" value="Add" action="#{productsManagedBean.addProduct}"></h:commandButton>
+                        </c:if>
+                        <c:if test="#{indexManagedBean.isAdmin}">
+                            <h:commandButton styleClass="button" style="float:left;" value="Update" action="#{productsManagedBean.updateProduct}"></h:commandButton>
+                        </c:if>
                     </div>
                 </div>
 

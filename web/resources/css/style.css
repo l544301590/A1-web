@@ -8,21 +8,26 @@ and open the template in the editor.
     Author     : dylan
 */
 
-/* Main Sections */  
 body { 
     font-family: sansserif;
+    background-color: #9bebff;
     width: 100%;
+}
+
+.container {
+    width: 800px;
+    margin: 0 auto;
 }
 
 .row {
     padding-top: 10px;
     padding-bottom: 10px;
     height: 30px;
-    margin: auto;
+    width: 100%;
 }
 .row .label {
-    width: 10%;
-    height: 30px;
+    width: 30%;
+    height: 100%;
     float: left;
     margin-right: 30px;
 }
@@ -31,47 +36,53 @@ body {
     float: right;
     height: 30px;
     line-height: 30px;
-    vertical-align: middle;
+    /*vertical-align: middle;*/
 }
 .row .input {
-    width: 30%;
-    height: 100%;
-    float: left;
-}
-.row .buttons {
     width: 50%;
     height: 100%;
-    float: left;
+    /*float: left;*/
+}
+.row .output {
+    width: 60%;
+    height: 100%;
+    /*float: left;*/
+}
+.row .buttons {
+    width: 60%;
+    height: 100%;
+    /*float: left;*/
 }
 
 .tab {
-    padding: .3em .8em;
+    padding: 5px 5px;
     border: 1px solid rgba(0,0,0,.1);
-    background: #58a linear-gradient(hsla(0,0%,100%,.2),transparent);
-    border-radius: .2em;
+    /*background: #58a linear-gradient(hsla(0,0%,100%,.2),transparent);*/
+    border-radius: 0 3px;
     box-shadow: 0 .05em .25em rgba(0,0,0,.5);
     color: white;
     text-shadow: 0 -.05em .05em rgba(0,0,0,.5);
-    font-size: 100%;
+    text-align: center;
+    border-top-left-radius: 1px 1px;
+    border-top-right-radius: 1px 1px;
+    border-bottom-right-radius: 5px 5px;
+    border-bottom-left-radius: 5px 5px;
     line-height: 1.5;
+    float: left;
 }
 
-.title {
-    padding: 20px; 
-    background-color: #57d5ff; 
-    border-radius: 3px; 
-    font-size: 20px; 
-    margin-bottom: 100px;
+.message {
+    font-size: 20px;
+    margin: 0 auto;
 }
-
-.container {
-    width: 100%;
+.email {
+    font-size: 14px; 
+    float: right;
+    text-decoration: underline;
 }
 
 /* h:inputText */  
 .input{
-    width: 280px;
-    height: 30px; 
     border-radius: 5px;
     -webkit-transition: all 0.30s ease-in-out; 
     -moz-transition: all 0.30s ease-in-out; 
@@ -90,7 +101,7 @@ body {
 } 
 
 /* button */
-.button, button {
+button, .button {
     padding: .3em .8em;
     border: 1px solid rgba(0,0,0,.1);
     background: #58a linear-gradient(hsla(0,0%,100%,.2),transparent);

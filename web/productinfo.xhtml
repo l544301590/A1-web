@@ -10,8 +10,9 @@
     </h:head>
     <h:body>
         <div class="container">
-
-            <h:outputText styleClass="title" value="#{indexManagedBean.email}"></h:outputText>
+            <div class="row">
+                <h:outputText styleClass="email" value="#{indexManagedBean.email}"></h:outputText>
+            </div>
             <div class="row">
                 <div class="label"><span>ID</span></div>
                 <h:outputText styleClass="input" value="#{productInfoManagedBean.id}"></h:outputText>
@@ -40,7 +41,7 @@
                 <div class="label"><span>Description</span></div>
                 <h:outputText styleClass="input" value="#{productInfoManagedBean.description}"></h:outputText>
             </div>
-            
+
             <h:form>
                 <div class="row">
                     <c:if test="#{indexManagedBean.moreThanVisitor}">

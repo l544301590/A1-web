@@ -11,19 +11,17 @@
     <h:body>
         <div class="container">
 
-            <div class="row" style="width: 60%; margin: 0 auto; margin-bottom: 100px;">
-                <a href="products.xhtml" style="float: left; padding: 2px; width: 15%;"><button>Products</button></a>
-                <a href="transactions.xhtml" style="float: left; padding: 2px; width: 15%;"><button>Orders</button></a>
-                <a href="cart.xhtml" style="float: left; padding: 2px; width: 15%;"><button>Cart</button></a>
-                <a href="userinfo.xhtml" style="float: left; padding: 2px; width: 15%;"><button>User</button></a>
-                <a href="users.xhtml" style="float: left; padding: 2px; width: 15%;"><button>Users</button></a>
-            </div>
-
-            <div>
+            <div class="row" style="margin-bottom: 50px;">
+                <a href="products.xhtml" class="tab"><button>Products</button></a>
+                <a href="transactions.xhtml" class="tab"><button>Orders</button></a>
+                <a href="cart.xhtml" class="tab"><button>Cart</button></a>
+                <a href="userinfo.xhtml" class="tab"><button>User</button></a>
+                <a href="users.xhtml" class="tab"><button>Users</button></a>
                 <h:outputText styleClass="title" value="#{indexManagedBean.email}"></h:outputText>
             </div>
+
             <h:form style="width: 100%;">
-                <div class="inputPanel" style="width: 50%; margin: 0 auto;">
+                <div class="inputPanel">
                     <div class="row">
                         <div class="label"><span>Email</span></div>
                         <h:inputText styleClass="input" value="#{usersManagedBean.inputEmail}"></h:inputText>

@@ -11,69 +11,68 @@
     <h:body>
         <div class="container">
 
-            <div class="row" style="width: 60%; margin: 0 auto; margin-bottom: 100px;">
-                <a href="products.xhtml" style="float: left; padding: 2px; width:15%;"><button>Products</button></a>
-                <a href="transactions.xhtml" style="float: left; padding: 2px; width: 15%;"><button>Orders</button></a>
-                <a href="cart.xhtml" style="float: left; padding: 2px; width: 15%;"><button>Cart</button></a>
-                <a href="userinfo.xhtml" style="float: left; padding: 2px; width: 15%;"><button>User</button></a>
+            <div class="row" style="margin-bottom: 50px;">
+                <a href="products.xhtml" class="tab"><button>Products</button></a>
+                <a href="transactions.xhtml" class="tab"><button>Orders</button></a>
+                <a href="cart.xhtml" class="tab"><button>Cart</button></a>
+                <a href="userinfo.xhtml" class="tab"><button>User</button></a>
                 <c:if test="#{indexManagedBean.isAdmin}">
-                    <a href="users.xhtml" style="float: left; padding: 2px; width: 15%;"><button>Users</button></a>
+                    <a href="users.xhtml" class="tab"><button>Users</button></a>
                 </c:if>
+                <h:outputText styleClass="email" value="#{indexManagedBean.email}"></h:outputText>
             </div>
-            
-            <div>
-                <h:outputText styleClass="title" value="#{indexManagedBean.email}"></h:outputText>
+
+            <div class="row">
+                <h:outputText styleClass="message" value="#{userInfoManagedBean.updateUserInfoMessage}"></h:outputText>
             </div>
-            
+            <h:form>
+                <div class="row">
+                    <div class="label">ID</div>
+                    <h:inputText styleClass="input" value="#{userInfoManagedBean.id}" readonly = "true"></h:inputText>
+                </div>
+                <div class="row">
+                    <div class="label">Email</div>
+                    <h:inputText styleClass="input" value="#{userInfoManagedBean.email}" readonly = "true"></h:inputText>
+                </div>
+                <div class="row">
+                    <div class="label">Password</div>
+                    <h:inputText styleClass="input" value="#{userInfoManagedBean.password}" readonly = "true"></h:inputText>
+                </div>
+                <div class="row">
+                    <div class="label">Nickname</div>
+                    <h:inputText styleClass="input" value="#{userInfoManagedBean.nickname}"></h:inputText>
+                </div>
+                <div class="row">
+                    <div class="label">Level</div>
+                    <h:inputText styleClass="input" value="#{userInfoManagedBean.level}" readonly = "true"></h:inputText>
+                </div>
+                <div class="row">
+                    <div class="label">FirstName</div>
+                    <h:inputText styleClass="input" value="#{userInfoManagedBean.firstName}">
+                        <f:validateRegex pattern="^[a-zA-Z]+$"/>
+                    </h:inputText>
+                </div>
+                <div class="row">
+                    <div class="label">LastName</div>
+                    <h:inputText styleClass="input" value="#{userInfoManagedBean.lastName}">
+                        <f:validateRegex pattern="^[a-zA-Z]+$"/>  
+                    </h:inputText>
+                </div>
+                <div class="row">
+                    <div class="label">Address</div>
+                    <h:inputText styleClass="input" value="#{userInfoManagedBean.address}"></h:inputText>
+                </div>
+                <div class="row">
+                    <div class="label">Phone</div>
+                    <h:inputText styleClass="input" value="#{userInfoManagedBean.phone}">
+                        <f:validateRegex pattern="(^[9][0-9]{7}$|^[0][0-9]{9}$)"/>
+                    </h:inputText>
+                </div>
+                <div class="row">
+                    <h:commandButton styleClass="button" value="Update" action="#{userInfoManagedBean.updateUser}"></h:commandButton>
+                </div>
+            </h:form> 
         </div>
-        <h:outputText styleClass="title" value="#{userInfoManagedBean.updateUserInfoMessage}"></h:outputText>
-         <h:form>
-            <div class="row">
-                <div class="label">ID</div>
-                <h:inputText value="#{userInfoManagedBean.id}" readonly = "true"></h:inputText>
-            </div>
-            <div class="row">
-                <div class="label">Email</div>
-                <h:inputText value="#{userInfoManagedBean.email}" readonly = "true"></h:inputText>
-            </div>
-            <div class="row">
-                <div class="label">Password</div>
-                <h:inputText value="#{userInfoManagedBean.password}" readonly = "true"></h:inputText>
-            </div>
-            <div class="row">
-                <div class="label">Nickname</div>
-                <h:inputText value="#{userInfoManagedBean.nickname}"></h:inputText>
-            </div>
-            <div class="row">
-                <div class="label">Level</div>
-                <h:inputText value="#{userInfoManagedBean.level}" readonly = "true"></h:inputText>
-            </div>
-            <div class="row">
-                <div class="label">FirstName</div>
-                <h:inputText value="#{userInfoManagedBean.firstName}">
-                <f:validateRegex pattern="^[a-zA-Z]+$"/>
-                </h:inputText>
-            </div>
-            <div class="row">
-                <div class="label">LastName</div>
-                <h:inputText value="#{userInfoManagedBean.lastName}">
-                <f:validateRegex pattern="^[a-zA-Z]+$"/>  
-                </h:inputText>
-            </div>
-            <div class="row">
-                <div class="label">Address</div>
-                <h:inputText value="#{userInfoManagedBean.address}"></h:inputText>
-            </div>
-            <div class="row">
-                <div class="label">Phone</div>
-                <h:inputText value="#{userInfoManagedBean.phone}">
-                <f:validateRegex pattern="(^[9][0-9]{7}$|^[0][0-9]{9}$)"/>
-                </h:inputText>
-            </div>
-            <div class="row">
-                <h:commandButton value="Update" action="#{userInfoManagedBean.updateUser}"></h:commandButton>
-            </div>
-        </h:form> 
     </h:body>
 </html>
 
