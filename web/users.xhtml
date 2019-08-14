@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
         <h:outputStylesheet name="css/style.css"/>
@@ -17,11 +18,107 @@
                 <a href="userinfo.xhtml" style="float: left; padding: 2px; width: 15%;"><button>User</button></a>
                 <a href="users.xhtml" style="float: left; padding: 2px; width: 15%;"><button>Users</button></a>
             </div>
-            
+
             <div>
                 <h:outputText styleClass="title" value="#{indexManagedBean.email}"></h:outputText>
             </div>
-            
+            <h:form style="width: 100%;">
+                <div class="inputPanel" style="width: 50%; margin: 0 auto;">
+                    <div class="row">
+                        <div class="label"><span>Email</span></div>
+                        <h:inputText styleClass="input" value="#{usersManagedBean.inputEmail}"></h:inputText>
+                    </div>
+                    <div class="row">
+                        <div class="label"><span>Nickname</span></div>
+                        <h:inputText styleClass="input" value="#{usersManagedBean.inputNickname}"></h:inputText>
+                    </div>
+                    <div class="row">
+                        <div class="label"><span>Password</span></div>
+                        <h:inputText styleClass="input" value="#{usersManagedBean.inputPassword}"></h:inputText>
+                    </div>
+                    <div class="row">
+                        <div class="label"><span>Level</span></div>
+                        <h:inputText styleClass="input" value="#{usersManagedBean.inputLevel}"></h:inputText>
+                    </div>
+                    <div class="row">
+                        <div class="label"><span>LastName</span></div>
+                        <h:inputText styleClass="input" value="#{usersManagedBean.inputLastName}"></h:inputText>
+                    </div>
+                    <div class="row">
+                        <div class="label"><span>FirstName</span></div>
+                        <h:inputText styleClass="input" value="#{usersManagedBean.inputFirstName}"></h:inputText>
+                    </div>
+                    <div class="row">
+                        <div class="label"><span>Address</span></div>
+                        <h:inputText styleClass="input" value="#{usersManagedBean.inputAddress}"></h:inputText>
+                    </div>
+                    <div class="row">
+                        <div class="label"><span>Phone</span></div>
+                        <h:inputText styleClass="input" value="#{usersManagedBean.inputPhone}"></h:inputText>
+                    </div>
+                    <div class="row" style="margin-bottom:100px;">
+                        <div class="label"></div>
+                        <div class="buttons">
+                            <h:commandButton styleClass="button" style="float:left;margin-right:20px" value="Search" action="#{usersManagedBean.searchUser}"></h:commandButton>
+                            <h:commandButton styleClass="button" style="float:left;margin-right:20px" value="View All" action="#{usersManagedBean.viewAllProducts}"></h:commandButton>
+                            <h:commandButton styleClass="button" style="float:left;margin-right:20px" value="Add" action="#{usersManagedBean.addUser}"></h:commandButton>
+                        </div>
+                    </div>
+                </div>
+                <h:dataTable value="#{usersManagedBean.users}" var="user"
+                             styleClass="table"
+                             headerClass="table-header"
+                             rowClasses="table-odd-row,table-even-row">
+                    <h:column>            
+                        <f:facet name="header">ID</f:facet>            
+                            #{user.id}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Email</f:facet>
+                            #{user.email}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Nickname</f:facet>
+                            #{user.nickname}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Password</f:facet>
+                            #{user.password}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Level</f:facet>
+                            #{user.level}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Firstname</f:facet>
+                            #{user.firstName}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Lastname</f:facet>
+                            #{user.lastName}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Address</f:facet>
+                            #{user.address}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Phone</f:facet>
+                            #{user.phone}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Detail</f:facet>
+                        <h:commandButton styleClass="button" value="Detail" action="userinfo">
+                            <f:param name="id" value="#{user.id}"/> 
+                        </h:commandButton>
+                    </h:column>
+                    <!--<c:if test="#{indexManagedBean.isAdmin}">-->
+                    <h:column>
+                        <f:facet name="header">Action</f:facet>
+                        <h:commandButton styleClass="button" value="Delete" action="#{usersManagedBean.deleteUser(user)}"></h:commandButton>
+                    </h:column>
+                    <!--</c:if>-->
+                </h:dataTable>
+            </h:form>
         </div>
     </h:body>
 </html>

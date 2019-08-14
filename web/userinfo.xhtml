@@ -67,12 +67,11 @@
             <div class="row">
                 <div class="label">Phone</div>
                 <h:inputText value="#{userInfoManagedBean.phone}">
-                <f:validateRegex pattern="(^[9][0-9]{8}$|^[0][0-9]{9}$)"/>
+                <f:validateRegex pattern="(^[9][0-9]{7}$|^[0][0-9]{9}$)"/>
                 </h:inputText>
             </div>
             <div class="row">
                 <h:commandButton value="Update" action="#{userInfoManagedBean.updateUser}"></h:commandButton>
-                <h:commandButton value="Change Level" action="#{userInfoManagedBean.changeLevel}"></h:commandButton>
             </div>
         </h:form> 
     </h:body>
