@@ -52,6 +52,7 @@ public class UserInfoManagedBean {
     public void initUser() {
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String idString = request.getParameter("id");
+        idString = idString == null ? "" : idString;
         if (!idString.isEmpty()) {
             int id = Integer.parseInt(idString);
             System.out.println("Id为空？" + id);
