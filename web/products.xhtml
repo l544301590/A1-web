@@ -70,6 +70,10 @@
                             #{product.name}
                     </h:column>
                     <h:column>
+                        <f:facet name="header">Image</f:facet>
+                        <h:graphicImage value="#{product.imgPath}"/>
+                    </h:column>
+                    <h:column>
                         <f:facet name="header">Category</f:facet>
                             #{product.category}
                     </h:column>

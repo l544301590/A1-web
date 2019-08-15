@@ -22,6 +22,10 @@
                 <h:outputText styleClass="input" value="#{productInfoManagedBean.name}"></h:outputText>
             </div>
             <div class="row">
+                <div class="label"><span>Image</span></div>
+                <h:graphicImage value="#{productInfoManagedBean.imgPath}"/>
+            </div>
+            <div class="row">
                 <div class="label"><span>Category</span></div>
                 <h:outputText styleClass="input" value="#{productInfoManagedBean.category}"></h:outputText>
             </div>
@@ -42,7 +46,7 @@
                 <h:outputText styleClass="input" value="#{productInfoManagedBean.description}"></h:outputText>
             </div>
 
-            <h:form>
+            <h:form style="margin-bottom: 50px;">
                 <div class="row">
                     <c:if test="#{indexManagedBean.moreThanVisitor}">
                         <h:commandButton styleClass="button" style="float:left;margin-right:20px" value="Add to Cart" action="#{productInfoManagedBean.addToCart}"></h:commandButton>
@@ -52,9 +56,15 @@
                 </div>
 
                 <div class="label">Add Comment</div>
-                <h:inputText value="#{productInfoManagedBean.inputRating}"></h:inputText>
-                <h:inputTextarea value="#{productInfoManagedBean.inputComment}"></h:inputTextarea>
-                <h:commandButton value="Add Comment" action="#{productInfoManagedBean.addComment}"></h:commandButton>
+                <div class="row">
+                    <h:inputText value="#{productInfoManagedBean.inputRating}"></h:inputText>
+                </div>
+                <div class="row">
+                    <h:inputTextarea value="#{productInfoManagedBean.inputComment}"></h:inputTextarea>
+                </div>
+                <div class="row">
+                    <h:commandButton value="Add Comment" action="#{productInfoManagedBean.addComment}"></h:commandButton>
+                </div>
             </h:form>
 
             <h:dataTable value="#{productInfoManagedBean.ratings}" var="rating"

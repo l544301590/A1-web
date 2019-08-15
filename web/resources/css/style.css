@@ -140,4 +140,6 @@ table tr:nth-child(even)
     background: #F5FAFA;
 }
 
-
+img {
+    max-height: 100px;
+}
