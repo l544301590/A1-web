@@ -21,7 +21,7 @@
                 </c:if>
                 <h:outputText styleClass="email" value="#{indexManagedBean.email}"></h:outputText>
             </div>
-            
+
             <h:form>
                 <h:dataTable value="#{cartManagedBean.cartList}" var="product"
                              styleClass="table"
@@ -53,11 +53,11 @@
                     </h:column>
                 </h:dataTable>
 
-                <h:column>
-                    <f:facet name="header">Buy</f:facet>
-                    <h:commandLink value="Commit Transaction" action="#{cartManagedBean.order}" />
-                </h:column>
-
+                <div class="row">
+                    <h:outputText value="Total Price: "></h:outputText>
+                    <h:outputText value="#{cartManagedBean.totalPrice}"></h:outputText>
+                    <h:commandButton styleClass="button" style="float: right;" value="Commit Transaction" action="#{cartManagedBean.order}" />
+                </div>
             </h:form>
 
         </div>
