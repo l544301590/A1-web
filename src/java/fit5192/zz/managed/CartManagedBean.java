@@ -44,6 +44,7 @@ public class CartManagedBean implements Serializable {
     private Map<Product, Integer> cart;  // store product with corresponding quantity
     private List<Product> cartList;  // store product only
     private User_ user;
+    private float totalPrice;
 
     public CartManagedBean() {
         this.cart = new HashMap<>();
@@ -90,6 +91,7 @@ public class CartManagedBean implements Serializable {
             ELContext context = FacesContext.getCurrentInstance().getELContext();
             TransactionsManagedBean transactionsManagedBean = (TransactionsManagedBean) FacesContext.getCurrentInstance().getApplication().getELResolver().getValue(context, null, "transactionsManagedBean");
             transactionsManagedBean.initTransactions();
+            calculateTotalPrice();
             return "transactions";
         } catch (Exception e) {
             e.printStackTrace();
@@ -104,10 +106,12 @@ public class CartManagedBean implements Serializable {
             this.cart.put(product, 1);
             this.cartList.add(product);
         }
+        calculateTotalPrice();
     }
 
     public void addNum(Product product) {
         this.cart.put(product, this.cart.get(product) + 1);
+        calculateTotalPrice();
     }
 
     public void subNum(Product product) {
@@ -117,8 +121,16 @@ public class CartManagedBean implements Serializable {
             this.cart.remove(product);
             this.cartList.remove(product);
         }
+        calculateTotalPrice();
     }
-
+    
+    public void calculateTotalPrice() {
+        totalPrice = 0;
+        for (Product product: cartList) {
+            totalPrice += product.getPrice();
+        }
+    }
+    
     public Map<Product, Integer> getCart() {
         return cart;
     }
@@ -137,6 +149,10 @@ public class CartManagedBean implements Serializable {
 
     public User_ getUser() {
         return user;
+    }
+
+    public float getTotalPrice() {
+        return totalPrice;
     }
 
 }
