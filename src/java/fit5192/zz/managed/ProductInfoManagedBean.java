@@ -36,10 +36,10 @@ public class ProductInfoManagedBean {
 
     private int id;
     private String name;  // full name, including category name
-//    private String imgPath;
     private int category;
     private String area;
     private float price;  // unit price
+    private String imgPath;
     private int inventory;
     private String description;
     private List<Rating> ratings;
@@ -59,7 +59,7 @@ public class ProductInfoManagedBean {
 
     @PostConstruct
     public void initProductInfoAndRatings() {
-        initProductInfo();;
+        initProductInfo();
         initRatings();
     }
 
@@ -70,6 +70,7 @@ public class ProductInfoManagedBean {
             this.category = product.getCategory();
             this.area = product.getArea();
             this.price = product.getPrice();
+            this.imgPath = product.getImgPath();
             this.inventory = product.getInventory();
             this.description = product.getDescription();
             this.ratings = product.getRatings();
@@ -78,7 +79,7 @@ public class ProductInfoManagedBean {
             e.printStackTrace();
         }
     }
-    
+
     public void initRatings() {
         try {
             ratings = ratingRepository.searchRatingsByProductId(currentProduct.getId());
@@ -138,6 +139,14 @@ public class ProductInfoManagedBean {
 
     public void setArea(String area) {
         this.area = area;
+    }
+
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
     }
 
     public float getPrice() {
