@@ -11,7 +11,9 @@ import fit5192.zz.repository.entities.User_;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -32,6 +34,9 @@ public class TransactionsManagedBean implements Serializable {
     private List<Transaction_> transactions;
     private User_ user;
     
+    private String inputId;
+    private String inputDate;
+    
     @EJB
     private TransactionRepository transactionRepository;
     
@@ -51,12 +56,48 @@ public class TransactionsManagedBean implements Serializable {
 //        }
     }
 
+    public void searchTransaction() {
+        Transaction_ transaction = new Transaction_();
+        if (inputId == "") {
+            transaction.setId(Integer.parseInt(inputId));
+        }
+        if (inputDate == "") {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                transaction.setDate(sdf.parse(inputDate));
+            } catch (Exception e) {
+                return;
+            }
+        }
+        transactions = transactionRepository.SerachTransactionByAnyAttribute(transaction);
+    }
+    
+    public void viewAllTransactions() {
+        this.initTransactions();
+    }
+    
     public List<Transaction_> getTransactions() {
         return transactions;
     }
 
     public void setTransactions(List<Transaction_> transactions) {
         this.transactions = transactions;
+    }
+
+    public String getInputId() {
+        return inputId;
+    }
+
+    public void setInputId(String inputId) {
+        this.inputId = inputId;
+    }
+
+    public String getInputDate() {
+        return inputDate;
+    }
+
+    public void setInputDate(String inputDate) {
+        this.inputDate = inputDate;
     }
     
 }
