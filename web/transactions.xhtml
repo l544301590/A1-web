@@ -23,6 +23,25 @@
             </div>
 
             <h:form>
+
+                <c:if test="#{indexManagedBean.moreThanManager}">
+                    <div class="row">
+                        <div class="label"><span>ID</span></div>
+                        <h:inputText styleClass="input" value="#{transactionsManagedBean.inputId}"></h:inputText>
+                    </div>
+                    <div class="row">
+                        <div class="label"><span>Date</span></div>
+                        <h:inputText styleClass="input" value="#{transactionsManagedBean.inputDate}"></h:inputText>
+                    </div>
+                    <div class="row">
+                        <div class="label"></div>
+                        <div class="buttons">
+                            <h:commandButton styleClass="button" value="Search" action="#{transactionsManagedBean.searchTransaction}"></h:commandButton>
+                            <h:commandButton styleClass="button" value="View All" action="#{transactionsoManagedBean.viewAllTransactions}"></h:commandButton>
+                        </div>
+                    </div>
+                </c:if>
+
                 <h:dataTable value="#{transactionsManagedBean.transactions}" var="transaction"
                              styleClass="table"
                              headerClass="table-header"
